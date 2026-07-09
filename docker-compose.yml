@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: agentqa
+      POSTGRES_PASSWORD: agentqa
+      POSTGRES_DB: agentqa
+    ports:
+      - "5432:5432"
+    volumes:
+      - agentqa_pgdata:/var/lib/postgresql/data
+
+volumes:
+  agentqa_pgdata:

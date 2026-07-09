@@ -1,0 +1,39 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 2rem;
+}
+
+.app header {
+  margin-bottom: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-tile {
+  border: 1px solid #4443;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  min-width: 120px;
+}
+
+.stat-tile .value {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.stat-tile.passed .value {
+  color: #16a34a;
+}
+
+.stat-tile.failed .value {
+  color: #dc2626;
+}
