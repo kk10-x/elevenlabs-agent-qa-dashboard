@@ -31,7 +31,21 @@ export default function TestCaseTable({ cases, selectedId, onSelect }: Props) {
           </thead>
           <tbody>
             {cases.map((c) => (
-              <tr key={c.id} className={selectedId === c.id ? "sel" : undefined} onClick={() => onSelect(c.id)}>
+              <tr
+                key={c.id}
+                className={selectedId === c.id ? "sel" : undefined}
+                onClick={() => onSelect(c.id)}
+                role="button"
+                tabIndex={0}
+                aria-expanded={selectedId === c.id}
+                aria-label={`${c.name} — last run ${c.status}. Toggle run details.`}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onSelect(c.id);
+                  }
+                }}
+              >
                 <td>
                   <div className="tc-name">{c.name}</div>
                   <div className="tc-aid">{c.agent_ref}</div>

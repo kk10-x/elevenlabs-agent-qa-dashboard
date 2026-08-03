@@ -5,7 +5,7 @@
   --line: #e2e2ee;
   --ink: #16161d;
   --ink-2: #55556a;
-  --ink-3: #8b8ba4;
+  --ink-3: #67687e;
   --accent: #7b61ff;
   --accent-soft: #efeaff;
   --pass: #12a150;
@@ -30,7 +30,7 @@
     --line: #292a37;
     --ink: #ececf2;
     --ink-2: #a2a3b6;
-    --ink-3: #6b6c82;
+    --ink-3: #8c8da2;
     --accent: #957dff;
     --accent-soft: #23203a;
     --pass: #3ecf8e;
@@ -51,7 +51,7 @@
   --line: #e2e2ee;
   --ink: #16161d;
   --ink-2: #55556a;
-  --ink-3: #8b8ba4;
+  --ink-3: #67687e;
   --accent: #7b61ff;
   --accent-soft: #efeaff;
   --pass: #12a150;
@@ -71,7 +71,7 @@
   --line: #292a37;
   --ink: #ececf2;
   --ink-2: #a2a3b6;
-  --ink-3: #6b6c82;
+  --ink-3: #8c8da2;
   --accent: #957dff;
   --accent-soft: #23203a;
   --pass: #3ecf8e;
@@ -158,11 +158,13 @@ h1 {
   background: var(--panel);
   border: 1px solid var(--line);
   padding: 8px 12px;
+  min-height: 38px;
   border-radius: 9px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 .ctl:hover {
   border-color: var(--accent);
@@ -281,6 +283,9 @@ select.ctl {
   border-radius: 13px;
   box-shadow: var(--shadow);
   padding: 16px 18px;
+  /* Allow grid/flex children to shrink below intrinsic content width so wide
+     content (the chart SVG) never forces horizontal page overflow. */
+  min-width: 0;
 }
 .card h2 {
   font-size: 13px;
@@ -425,6 +430,7 @@ tbody td {
   border-bottom: 1px solid var(--line);
   font-size: 13px;
   vertical-align: middle;
+  transition: background-color 0.12s ease;
 }
 tbody tr {
   cursor: pointer;
@@ -437,6 +443,10 @@ tbody tr:hover td {
 }
 tbody tr.sel td {
   background: var(--accent-soft);
+}
+tbody tr:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 .tc-name {
   font-weight: 550;

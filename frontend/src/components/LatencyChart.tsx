@@ -31,7 +31,7 @@ export default function LatencyChart({ data }: { data: LatencyPoint[] }) {
 
   return (
     <div className="chart-box" ref={boxRef}>
-      <svg className="chart" role="img" aria-label="Per-run latency trend" width={w} height={H}>
+      <svg className="chart" role="img" aria-label="Per-run latency trend" width="100%" height={H}>
         <defs>
           <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.22" />
