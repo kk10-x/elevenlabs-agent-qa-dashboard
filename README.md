@@ -3,6 +3,8 @@
 Test and monitor [ElevenLabs Agents Platform](https://elevenlabs.io/docs/agents-platform) agents over time — catch tone,
 latency, and tool-calling regressions before they hit production.
 
+![Agent QA & Observability dashboard — animated reveal](docs/reveal.gif)
+
 ## Live demo
 
 ![Agent QA & Observability dashboard](docs/demo.png)
