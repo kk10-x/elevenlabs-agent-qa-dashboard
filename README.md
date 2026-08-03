@@ -3,6 +3,22 @@
 Test and monitor [ElevenLabs Agents Platform](https://elevenlabs.io/docs/agents-platform) agents over time — catch tone,
 latency, and tool-calling regressions before they hit production.
 
+## Live demo
+
+![Agent QA & Observability dashboard](docs/demo.png)
+
+The dashboard runs as a **self-contained static demo**: when no backend is reachable it serves a built-in
+simulated dataset, so the exact same build works against a live FastAPI backend in development and as a
+zero-backend demo on any static host. No `ELEVENLABS_API_KEY`, agent, or database is required to view it.
+
+Deploy it to **GitHub Pages** with the included workflow (`.github/workflows/pages.yml`):
+
+1. Push to `main` (the workflow builds `frontend/` and publishes it).
+2. One-time: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+The site is then served at `https://<user>.github.io/elevenlabs-agent-qa-dashboard/`. It also builds cleanly
+for any other static host — `cd frontend && npm install && npm run build` produces a deployable `dist/`.
+
 ## Problem
 
 The ElevenLabs open-source ecosystem is full of agent *creation* demos (outbound-call
@@ -67,10 +83,10 @@ the Agents Platform surface rather than the TTS surface.
 
 ## v1 scope
 
+- [x] Dashboard: pass/fail results + trend history over time *(built; runs on simulated data as a static demo)*
 - [ ] Define test cases (expected conversation flow + assertions) as config
 - [ ] Run test cases against a live agent via the ElevenLabs API
 - [ ] Flag failures: wrong response, latency spike, interruption mishandling
-- [ ] Dashboard: pass/fail results + trend history over time
 
 ## Stretch goals
 
@@ -113,8 +129,10 @@ docker compose up -d db
 
 ## Status
 
-Early scaffold — backend/frontend skeletons and CI are in place; test-case runner,
-ElevenLabs integration, and dashboard views are being built out next.
+The **dashboard frontend is built and hostable** as a static demo (see above), running on a simulated
+dataset via a graceful fallback in `frontend/src/api.ts`. The backend skeleton and CI are in place; the
+test-case runner and live ElevenLabs integration are the next pieces to wire up, at which point the
+dashboard's demo fallback is transparently replaced by real data.
 
 ## License
 
