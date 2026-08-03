@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { loadDashboard } from "../api";
 import type { DashboardData } from "../types";
@@ -10,12 +10,19 @@ import TestCaseTable from "./TestCaseTable";
 
 function useTheme(): [string | null, () => void] {
   const [theme, setTheme] = useState<string | null>(null);
+  const animTimer = useRef<number | undefined>(undefined);
   const toggle = () => {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const current = theme ?? (prefersDark ? "dark" : "light");
     const next = current === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
+    const root = document.documentElement;
+    // Enable the color crossfade only for the duration of the swap, so unrelated
+    // interactions (e.g. row hover) keep their own faster transitions.
+    root.classList.add("theme-anim");
+    root.setAttribute("data-theme", next);
     setTheme(next);
+    window.clearTimeout(animTimer.current);
+    animTimer.current = window.setTimeout(() => root.classList.remove("theme-anim"), 550);
   };
   return [theme, toggle];
 }

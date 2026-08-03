@@ -766,6 +766,16 @@ tr.sel .chev {
     transform: rotate(360deg);
   }
 }
+/* Theme swap crossfade. The `theme-anim` class is added to <html> by the toggle
+   handler only for the duration of the swap, so these 500ms color transitions
+   apply during a light/dark switch but never slow down other interactions. The
+   reduced-motion block below (with !important) disables it for those users. */
+html.theme-anim,
+html.theme-anim * {
+  transition: background-color 500ms ease, color 500ms ease, border-color 500ms ease,
+    fill 500ms ease, stroke 500ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
