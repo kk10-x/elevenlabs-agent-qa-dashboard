@@ -662,6 +662,105 @@ tr.sel .chev {
   }
 }
 
+/* ---- entrance / reveal animation ----
+   Every animated element's RESTING style is its final visible state and each
+   keyframe animates FROM a hidden state, so disabling animation (reduced-motion
+   below) leaves everything fully visible. All transforms/opacity/stroke — no
+   layout-affecting properties, so no CLS. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes growx {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.kpi {
+  animation: rise 460ms cubic-bezier(0.2, 0.65, 0.2, 1) backwards;
+}
+.kpi:nth-child(1) {
+  animation-delay: 40ms;
+}
+.kpi:nth-child(2) {
+  animation-delay: 80ms;
+}
+.kpi:nth-child(3) {
+  animation-delay: 120ms;
+}
+.kpi:nth-child(4) {
+  animation-delay: 160ms;
+}
+.kpi:nth-child(5) {
+  animation-delay: 200ms;
+}
+
+.grid2 > * {
+  animation: rise 500ms cubic-bezier(0.2, 0.65, 0.2, 1) backwards;
+}
+.grid2 > *:nth-child(1) {
+  animation-delay: 220ms;
+}
+.grid2 > *:nth-child(2) {
+  animation-delay: 280ms;
+}
+
+.tbl-card {
+  animation: rise 500ms cubic-bezier(0.2, 0.65, 0.2, 1) 330ms backwards;
+}
+
+/* chart: draw the trend line, then fade the fill + points in behind it */
+.chart-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw 950ms ease-out 340ms backwards;
+}
+.chart-area {
+  animation: fadein 700ms ease 520ms backwards;
+}
+.chart-dot {
+  animation: fadein 300ms ease backwards;
+}
+
+/* failure bars grow from the left, staggered */
+.fbar .fill {
+  transform-origin: left center;
+  animation: growx 720ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+.fbar:nth-child(1) .fill {
+  animation-delay: 360ms;
+}
+.fbar:nth-child(2) .fill {
+  animation-delay: 440ms;
+}
+.fbar:nth-child(3) .fill {
+  animation-delay: 520ms;
+}
+.fbar:nth-child(4) .fill {
+  animation-delay: 600ms;
+}
+.fbar:nth-child(5) .fill {
+  animation-delay: 680ms;
+}
+
+/* drawer eases open when a test-case row is selected */
+.drawer {
+  animation: rise 320ms cubic-bezier(0.2, 0.65, 0.2, 1) backwards;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

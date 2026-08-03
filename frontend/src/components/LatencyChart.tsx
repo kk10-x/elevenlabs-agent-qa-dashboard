@@ -62,8 +62,10 @@ export default function LatencyChart({ data }: { data: LatencyPoint[] }) {
           {LATENCY_THRESHOLD_MS} ms threshold
         </text>
 
-        <path d={areaPath} fill="url(#areaGrad)" />
+        <path className="chart-area" d={areaPath} fill="url(#areaGrad)" />
         <path
+          className="chart-line"
+          pathLength={1}
           d={linePath}
           fill="none"
           stroke="var(--accent)"
@@ -83,9 +85,12 @@ export default function LatencyChart({ data }: { data: LatencyPoint[] }) {
         {data.map((p, i) => {
           const fail = p.status === "failed";
           const color = fail ? "var(--fail)" : "var(--pass)";
+          const dotDelay = `${360 + i * 55}ms`;
           return (
             <g key={`pt-${i}`}>
               <circle
+                className="chart-dot"
+                style={{ animationDelay: dotDelay }}
                 cx={xs(i)}
                 cy={ys(p.ms)}
                 r={fail ? 6 : 4.6}
@@ -93,7 +98,9 @@ export default function LatencyChart({ data }: { data: LatencyPoint[] }) {
                 stroke={color}
                 strokeWidth={fail ? 2.4 : 2}
               />
-              {fail && <circle cx={xs(i)} cy={ys(p.ms)} r={2} fill={color} />}
+              {fail && (
+                <circle className="chart-dot" style={{ animationDelay: dotDelay }} cx={xs(i)} cy={ys(p.ms)} r={2} fill={color} />
+              )}
               <circle
                 cx={xs(i)}
                 cy={ys(p.ms)}
