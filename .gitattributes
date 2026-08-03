@@ -1,0 +1,6 @@
+# Deploy files are consumed on Linux (bella) — keep them LF regardless of the
+# checkout platform so a Windows CRLF conversion can't corrupt them.
+deploy/Dockerfile        text eol=lf
+deploy/nginx.conf        text eol=lf
+docker-compose.deploy.yml text eol=lf
+.env.deploy.example      text eol=lf

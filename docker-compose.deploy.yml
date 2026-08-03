@@ -1,0 +1,21 @@
+# Standalone deploy compose for the static demo. Selected via COMPOSE_FILE in
+# .env so it never collides with the tracked full-stack docker-compose.yml.
+# Serves the built Vite demo from nginx on a loopback-only port; public HTTPS
+# is layered on separately via Tailscale (Funnel/serve), never a 0.0.0.0 bind.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    image: elevenlabs-agent-qa-dashboard-web:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-web
+    restart: unless-stopped
+    ports:
+      # Loopback only — reached from the Windows box over SSH tunnel and
+      # exposed publicly through Tailscale, not by publishing to 0.0.0.0.
+      - "127.0.0.1:8120:80"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
